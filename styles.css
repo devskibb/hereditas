@@ -1,0 +1,622 @@
+/* hereditaris-frontend/styles.css */
+
+/* Import the Cinzel font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #8b3a3a; /* Rich burgundy */
+    --secondary-color: #b5651d; /* Warm bronze */
+    --accent-color: #4caf50; /* Rich green */
+    --text-color: #2b2b2b;
+    --background-color: #f4f0e6;
+    --container-bg: #fffefc;
+    --border-color: #9c8a6e;
+    --shadow-color: rgba(0,0,0,0.1);
+    --light-maroon: #5a3e3c;
+    --deep-maroon: #4a2c2a;
+    --warm-brown: #a58a6b;
+    --rich-red: #a52a2a;
+    --warm-brown-status: #8b5e3c;
+    --warm-bronze: #b5651d;
+    --very-light-burgundy: rgba(139, 58, 58, 0.1);
+}
+
+/* Global Styles */
+/* Pseudo-element for Background Image */
+body::before {
+    content: '';
+    position: fixed; /* Fixed position to keep it static during scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../ROMEIMG.jpg'); /* Adjust the path if necessary */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center center; /* Centers the image */
+    opacity: 0.8; /* Adjust this value between 0 (transparent) and 1 (opaque) */
+    z-index: -1; /* Places the image behind all other content */
+    pointer-events: none; /* Allows clicks to pass through the image */
+}
+
+/* Optional: Add an overlay to enhance readability */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 7, 7, 0.582); /* Semi-transparent white overlay */
+    z-index: -1;
+    pointer-events: none;
+}
+
+.divider {
+    width: 20%;
+    height: 2px; /* You can temporarily increase this for testing */
+    background-color: var(--primary-color);
+    margin: 10px auto;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+    animation: slide 2s infinite;
+}
+
+@keyframes slide {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Container styling */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fffefc; /* Light parchment-like background */
+    border: 2px solid #8b3a3a; /* Soft earthy border */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Slightly stronger shadow for depth */
+    border-radius: 8px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* Cursor and hover effect for toggle headers */
+.toggle-header {
+    text-align: center; /* Center the header text */
+    cursor: pointer;
+    user-select: none;
+    position: relative; /* Establish a positioning context for the toggle icon */
+    padding: 10px 0;    /* Optional: Add vertical padding for better spacing */
+}
+  .toggle-header:hover {
+    color: #007BFF;
+  }
+  
+  /* Rotate the toggle icon when collapsed */
+  .toggle-icon {
+    transition: transform 0.3s ease;
+  }
+  .collapsed .toggle-icon {
+    transform: rotate(-90deg);
+  }
+  
+  /* Initially hide all toggle contents */
+  .toggle-content {
+    display: none;
+    margin-top: 10px;
+  }
+  
+  /* Show the toggle content when active */
+  .active .toggle-content {
+    display: block;
+  }
+
+/* Heading styles */
+h1 {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: #4a2c2a; /* Deep maroon */
+    margin-bottom: 0px;
+    font-size: 3em; /* Increased font size */
+    font-weight: 200; /* Bold weight */
+    letter-spacing: 2px; /* Increased letter spacing */
+    text-transform: uppercase; /* Uppercase letters */
+    position: relative; /* For decorative underline */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.397); /* Soft shadow */
+
+}
+
+h1::before,
+h1::after {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 4px;
+    background-color: #8b3a3a; /* Matching button color */
+    margin: 0 10px;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+
+/* Subheading styles */
+h2 {
+    font-family: 'Cinzel', serif;
+    color: #4a2c2a; /* Deep maroon */
+    margin-bottom: 20px;
+    font-size: 1.5em; /* Slightly smaller than h1 */
+    font-weight: 200;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+h5 {
+    margin-top: 0; /* Remove default top margin */
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: #4a2c2a; /* Deep maroon */
+    margin-bottom: 3px;
+    font-size: 0.75em; /* Increased font size */
+    font-weight: 100; /* Bold weight */
+    letter-spacing: 1px; /* Increased letter spacing */
+    text-transform: uppercase; /* Uppercase letters */
+    position: relative; /* For decorative underline */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.397); /* Soft shadow */
+
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #5a3e3c; /* Muted maroon */
+}
+
+/* Inputs and Textareas */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #bfa58a; /* Soft brown border */
+    border-radius: 4px;
+    background-color: #fffaf0; /* Slightly off-white */
+    color: #2b2b2b;
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Input focus state */
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #a58a6b; /* Warm focus border */
+    outline: none;
+    box-shadow: 0 0 5px rgba(165, 138, 107, 0.5); /* Subtle shadow */
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    background-color: #8b3a3a; /* Rich burgundy */
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #6f2a2a; /* Darker burgundy on hover */
+}
+
+/* Input-button group adjustments */
+.input-button-group {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 15px;
+}
+
+.input-button-group input,
+.input-button-group button {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1;
+    box-sizing: border-box;
+    height: 50px;
+}
+
+.input-button-group input {
+    flex: 1;
+    padding: 0 12px;
+    border: 1px solid #bfa58a;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    background-color: #fffaf0;
+}
+
+
+.input-button-group button {
+    padding: 0 20px;
+    background-color: #8b3a3a;
+    border: 1px solid #8b3a3a;
+    border-radius: 0 4px 4px 0;
+    color: #fff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.input-button-group button:hover {
+    background-color: #6f2a2a;
+    border-color: #6f2a2a;
+}
+
+/* Contract Card */
+.contract-card {
+    background-color: #fffdf7;
+    padding: 20px;
+    border: 1px solid #d4c0a1;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Contract Header */
+.contract-header {
+    cursor: pointer;
+    background-color: #f0e9d5;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.contract-header p {
+    margin: 0;
+    font-weight: bold;
+    color: #4a2c2a;
+}
+
+.contract-header .toggle-icon {
+    float: right;
+    font-size: 16px;
+    color: #4a2c2a;
+}
+
+/* Section Headers */
+.section-header {
+    background-color: #f0e9d5;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.section-header p {
+    margin: 0;
+    font-weight: bold;
+    font-family: 'Cinzel', serif;
+    color: #4a2c2a;
+}
+
+.section-header .toggle-icon {
+    float: right;
+    font-size: 16px;
+    color: #4a2c2a;
+}
+
+/* Section Content */
+.section-content {
+    padding: 12px;
+    border: 1px solid #d4c0a1;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background-color: #fffaf0;
+}
+
+/* Status Message */
+.status-message {
+    margin-top: 10px;
+    font-style: italic;
+    color: #8b5e3c; /* Warm brown */
+}
+
+/* Remove Beneficiary Button */
+.remove-beneficiary-button {
+    background-color: transparent;
+    border: none;
+    color: #a52a2a; /* Rich red */
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.remove-beneficiary-button:hover {
+    color: #7a1c1c;
+}
+
+/* Heartbeat Button */
+.heartbeat-button {
+    padding: 10px 20px;
+    background-color: #4caf50; /* Rich green */
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.heartbeat-button:hover {
+    background-color: #388e3c;
+}
+
+/* Beneficiary Group */
+.beneficiary-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.beneficiary-group input {
+    padding: 10px 12px;
+    font-family: 'Cinzel', serif;
+    color: #2b2b2b;
+    border: 1px solid #bfa58a;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fffaf0;
+}
+
+.beneficiary-address {
+    flex: 2;
+}
+
+.beneficiary-share {
+    flex: 1;
+}
+
+/* Period Group Styling */
+.period-group {
+    margin-bottom: 15px;
+}
+
+.period-input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.period-input-group input[type="number"],
+.period-input-group select {
+    flex: 1;
+    padding: 10px 12px;
+    font-family: 'Cinzel', serif;
+    border: 1px solid #bfa58a;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fffaf0;
+}
+
+/* Adjust the contract-details padding to accommodate nested accordions */
+.contract-details {
+    padding: 12px 0;
+}
+
+/* Optional: Style the forms inside section-content */
+.section-content form {
+    margin-bottom: 10px;
+}
+
+/* General Paragraph Styling */
+p {
+    margin: 5px 0;
+    color: #2b2b2b;
+    font-family: 'Cinzel', serif;
+}
+
+/* List Styling */
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #2b2b2b;
+    font-family: 'Cinzel', serif;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+/* Error and Success Messages */
+.error {
+    color: #a52a2a; /* Rich red */
+}
+
+.success {
+    color: #4caf50; /* Rich green */
+}
+
+/* Links */
+.address-link {
+    color: #b5651d; /* Warm bronze */
+    text-decoration: none;
+}
+
+.address-link:hover {
+    text-decoration: underline;
+}
+
+/* Hover Effect for Beneficiary List Items */
+ul li:hover {
+    background-color: rgba(139, 58, 58, 0.1); /* Light burgundy */
+}
+
+/* Table Styles (if any tables are used) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+th, td {
+    padding: 10px 12px;
+    border: 1px solid #d4c0a1;
+    text-align: left;
+    font-family: 'Cinzel', serif;
+    color: #2b2b2b;
+    background-color: #fffaf0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .input-button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-button-group input,
+    .input-button-group button {
+        width: 100%;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .input-button-group input {
+        border-right: 1px solid #bfa58a;
+    }
+
+    .beneficiary-group {
+        flex-direction: column;
+    }
+
+    .beneficiary-address,
+    .beneficiary-share {
+        width: 100%;
+    }
+
+    .period-input-group {
+        flex-direction: column;
+    }
+
+    .period-input-group input[type="number"],
+    .period-input-group select {
+        width: 100%;
+    }
+}
+
+/* Remove default link styling for token links */
+.token-link {
+    color: inherit;          /* Inherit the text color from the parent element */
+    text-decoration: none;   /* Remove underline */
+}
+
+/* Optional: Add hover effect if desired */
+.token-link:hover {
+    text-decoration: underline; /* Underline on hover */
+    cursor: pointer;            /* Show pointer cursor on hover */
+}
+
+.distribute-inheritance-section {
+    margin-top: 20px;
+}
+
+.distribute-inheritance-section .countdown-timer {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #8b5e3c; /* Warm brown */
+}
+
+.distribute-inheritance-section .distribute-button {
+    padding: 10px 20px;
+    background-color: #4caf50; /* Rich green */
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.distribute-inheritance-section .distribute-button:hover:enabled {
+    background-color: #388e3c;
+}
+
+.distribute-inheritance-section .distribute-button:disabled {
+    background-color: #a5d6a7; /* Light green when disabled */
+    cursor: not-allowed;
+}
+
+/* Tooltip Container - Remove Beneficiary Button */
+.remove-beneficiary-button {
+    position: relative; /* Establish a positioning context for the tooltip */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border: none; /* Remove default button border */
+    background: none; /* Remove default button background */
+    color: var(--rich-red, red); /* Set button color, adjust as needed */
+    padding: 5px; /* Add padding for better click area */
+    font-size: 16px; /* Adjust icon size if necessary */
+}
+
+/* Tooltip Text */
+.remove-beneficiary-button::after {
+    content: "Remove a beneficiary"; /* Tooltip text */
+    position: absolute;
+    bottom: 125%; /* Position above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black background */
+    color: #fff; /* White text */
+    padding: 5px 8px; /* Padding inside the tooltip */
+    border-radius: 4px; /* Rounded corners */
+    white-space: nowrap; /* Prevent text from wrapping */
+    font-size: 12px; /* Tooltip text size */
+    opacity: 0; /* Initially invisible */
+    visibility: hidden; /* Initially hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Fade-in effect */
+    z-index: 10; /* Ensure tooltip appears above other elements */
+}
+
+/* Tooltip Arrow */
+.remove-beneficiary-button::before {
+    content: "";
+    position: absolute;
+    bottom: 115%; /* Position just below the tooltip text */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px; /* Size of the arrow */
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent; /* Arrow color */
+    opacity: 0; /* Initially invisible */
+    visibility: hidden; /* Initially hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Fade-in effect */
+    z-index: 10; /* Ensure arrow appears above other elements */
+}
+
+/* Show Tooltip on Hover */
+.remove-beneficiary-button:hover::after,
+.remove-beneficiary-button:hover::before {
+    opacity: 1; /* Make tooltip visible */
+    visibility: visible; /* Make tooltip visible */
+}
