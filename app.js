@@ -1,7 +1,7 @@
 // hereditaris-frontend/app.js
 
 // Contract Addresses
-const factoryAddress = "0x9b95dE6E050d740a2b19A194cB313b9F96B52414"; // InheritanceFactory on Sepolia
+const factoryAddress = "0xCf7211A2357aB8D7C70bBd4532eFC43f4d967575"; // InheritanceFactory on Sepolia
 
 // Contract ABIs
 let factoryABI;
@@ -298,79 +298,59 @@ function initializeCountdownTimer(targetTimestamp, countdownElement, buttonEleme
     updateCountdown();
 }
 
-
-// Function to display Beneficiary Contracts
+// Function to display Contracts where the user is a Beneficiary
 async function displayBeneficiaryContracts(factoryContractReadOnly, userAddress) {
     if (!factoryContractReadOnly) return;
 
-    beneficiaryContractsListDiv.innerHTML = "";
+    beneficiaryContractsListDiv.innerHTML = "<p>Loading beneficiary contracts...</p>";
 
     try {
-        // Get the total number of inheritance contracts
-        const totalContracts = await factoryContractReadOnly.getInheritanceContractCount();
-
-        if (totalContracts == 0) {
-            beneficiaryContractsListDiv.innerHTML = "<p>No inheritance contracts found.</p>";
-            return;
-        }
-
-        // Initialize Ethers provider
-        const ethersProvider = new ethers.BrowserProvider(window.ethereum);
-
-        const beneficiaryContracts = [];
-
-        // For each contract, check if the user is a beneficiary and contract is not distributed
-        for (let i = 0; i < totalContracts; i++) {
-            // Get the contract address
-            const contractAddress = await factoryContractReadOnly.allInheritanceContracts(i);
-
-            const inheritanceContract = new ethers.Contract(contractAddress, inheritanceABI, ethersProvider);
-
-            // Fetch Beneficiaries
-            const beneficiaries = await getAllBeneficiaries(inheritanceContract);
-            const isDistributed = await inheritanceContract.isDistributed();
-
-            // Check if userAddress is in beneficiaries
-            const isBeneficiary = beneficiaries.some(b => b.beneficiaryAddress.toLowerCase() === userAddress.toLowerCase());
-
-            if (isBeneficiary && !isDistributed) {
-                // Add to beneficiaryContracts list
-                beneficiaryContracts.push({ contractAddress, inheritanceContract });
-            }
-        }
+        // Fetch contracts where the user is a beneficiary
+        const beneficiaryContracts = await factoryContractReadOnly.getContractsByBeneficiary(userAddress);
 
         if (beneficiaryContracts.length === 0) {
             beneficiaryContractsListDiv.innerHTML = "<p>You are not a beneficiary in any inheritance contracts.</p>";
             return;
         }
 
-        // Display the contracts where the user is a beneficiary
-        for (const { contractAddress, inheritanceContract } of beneficiaryContracts) {
+        beneficiaryContractsListDiv.innerHTML = ""; // Clear loading message
+
+        // Initialize Ethers provider
+        const ethersProvider = new ethers.BrowserProvider(window.ethereum);
+
+        // Iterate over beneficiary contracts and display details
+        for (const contractAddress of beneficiaryContracts) {
+            const inheritanceContract = new ethers.Contract(contractAddress, inheritanceABI, ethersProvider);
+
+            // Check if assets have been distributed
+            const isDistributed = await inheritanceContract.isDistributed();
+
+            if (isDistributed) {
+                console.log(`Contract ${contractAddress} has already been distributed. Skipping display.`);
+                continue; // Skip to the next contract
+            }
+
+            // Fetch Beneficiaries
+            const beneficiaries = await getAllBeneficiaries(inheritanceContract);
+
             // Fetch ETH Balance
             const ethBalance = await ethersProvider.getBalance(contractAddress);
 
             // Fetch Tokens Info
             const tokensInfo = await fetchTokensInfo(inheritanceContract, contractAddress);
 
-            // Fetch Beneficiaries
-            const beneficiaries = await getAllBeneficiaries(inheritanceContract);
-
             // Fetch Inactivity Period and Last Active Timestamp
             const lastActiveTimestampBigInt = await inheritanceContract.lastActiveTimestamp();
             const inactivityPeriodBigInt = await inheritanceContract.inactivityPeriod();
+            const gracePeriodBigInt = await inheritanceContract.gracePeriod(); // Assuming you have a gracePeriod getter
 
             // Convert BigInt to Number for calculations
             const lastActiveTimestamp = Number(lastActiveTimestampBigInt);
             const inactivityPeriod = Number(inactivityPeriodBigInt);
+            const gracePeriod = Number(gracePeriodBigInt);
 
             // Calculate target timestamp
             const targetTimestamp = lastActiveTimestamp + inactivityPeriod; // Unix timestamp in seconds
-
-            // Calculate remaining time based on current blockchain time
-            let remainingTime = targetTimestamp - Math.floor(Date.now() / 1000); // Initial estimate using local time
-
-            // Ensure remainingTime is not negative
-            if (remainingTime < 0) remainingTime = 0;
 
             // Create Contract Card
             const contractCard = document.createElement('div');
@@ -448,7 +428,7 @@ async function displayBeneficiaryContracts(factoryContractReadOnly, userAddress)
                 }
             });
 
-            // Tokens Toggle (now inside contract-details)
+            // Tokens Toggle (if any tokens exist)
             if (tokensInfo.length > 0) {
                 const tokensHeader = details.querySelector('.tokens-header');
                 const tokensDetails = details.querySelector('.tokens-details');
@@ -474,7 +454,7 @@ async function displayBeneficiaryContracts(factoryContractReadOnly, userAddress)
             const statusMessage = distributeSection.querySelector('.status-message');
 
             // Initialize Countdown Timer
-            initializeCountdownTimer(targetTimestamp, countdownTimer, distributeButton, ethersProvider);
+            initializeCountdownTimer(targetTimestamp, countdownTimer, distributeButton, contractAddress, inheritanceContract, statusMessage);
 
             // Event Listener for Distribute Inheritance Button
             distributeButton.addEventListener('click', async () => {
@@ -485,7 +465,7 @@ async function displayBeneficiaryContracts(factoryContractReadOnly, userAddress)
                     statusMessage.style.color = "blue";
 
                     // Connect the contract with signer for write operations
-                    const inheritanceContractSigner = inheritanceContract.connect(signer);
+                    const inheritanceContractSigner = new ethers.Contract(contractAddress, inheritanceABI, signer);
                     const tx = await inheritanceContractSigner.distributeInheritance();
                     await tx.wait();
 
@@ -506,9 +486,11 @@ async function displayBeneficiaryContracts(factoryContractReadOnly, userAddress)
 
     } catch (error) {
         console.error("Error displaying beneficiary contracts:", error);
-        beneficiaryContractsListDiv.innerHTML = "<p>Error fetching contracts.</p>";
+        beneficiaryContractsListDiv.innerHTML = "<p>Error fetching beneficiary contracts.</p>";
     }
 }
+
+
 
 
 async function displayUserContracts(factoryContractReadOnly, userAddress) {
@@ -907,6 +889,7 @@ async function displayUserContracts(factoryContractReadOnly, userAddress) {
                     }
                     // Refresh Contracts List
                     await displayUserContracts(factoryContractReadOnly, userAddress);
+                    await displayBeneficiaryContracts(factoryContractReadOnly, userAddress);
                 } catch (error) {
                     console.error("Error depositing assets:", error);
                     statusMessage.textContent = `Error: ${error.reason || error.message}`;
@@ -951,6 +934,7 @@ async function displayUserContracts(factoryContractReadOnly, userAddress) {
                     }
                     // Refresh Contracts List
                     await displayUserContracts(factoryContractReadOnly, userAddress);
+                    await displayBeneficiaryContracts(factoryContractReadOnly, userAddress);
                 } catch (error) {
                     console.error("Error withdrawing assets:", error);
                     statusMessage.textContent = `Error: ${error.reason || error.message}`;
@@ -977,6 +961,7 @@ async function displayUserContracts(factoryContractReadOnly, userAddress) {
                     statusMessage.style.color = "green";
                     // Refresh Contracts List
                     await displayUserContracts(factoryContractReadOnly, userAddress);
+                    await displayBeneficiaryContracts(factoryContractReadOnly, userAddress);
                 } catch (error) {
                     console.error("Error adding beneficiary:", error);
                     statusMessage.textContent = `Error: ${error.message}`;
@@ -1070,6 +1055,7 @@ async function displayUserContracts(factoryContractReadOnly, userAddress) {
                         statusMessage.style.color = "green";
                         // Refresh Contracts List
                         await displayUserContracts(factoryContractReadOnly, userAddress);
+                        await displayBeneficiaryContracts(factoryContractReadOnly, userAddress);
                     } catch (error) {
                         console.error("Error removing beneficiary:", error);
                         statusMessage.textContent = `Error: ${error.message}`;
@@ -1263,7 +1249,8 @@ createContractForm.addEventListener('submit', async (e) => {
 
         // Refresh Contracts List
         const connectedAddress = await signer.getAddress();
-        await displayUserContracts(factoryContractReadOnly, connectedAddress);
+        await displayUserContracts(factoryContractReadOnly, userAddress);
+        await displayBeneficiaryContracts(factoryContractReadOnly, userAddress);
 
         // Reset Form
         createContractForm.reset();
