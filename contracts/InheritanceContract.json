@@ -30,6 +30,11 @@
 				"internalType": "address",
 				"name": "_developer",
 				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_factoryAddress",
+				"type": "address"
 			}
 		],
 		"stateMutability": "payable",
@@ -168,7 +173,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "DEVELOPER_FEE_PERCENT",
+		"name": "DEVELOPER_FEE_BPS",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -181,7 +186,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "EXECUTOR_FEE_PERCENT",
+		"name": "EXECUTOR_FEE_BPS",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -309,6 +314,19 @@
 		"name": "distributeInheritance",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "factory",
+		"outputs": [
+			{
+				"internalType": "contract IInheritanceFactory",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
