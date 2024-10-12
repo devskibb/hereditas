@@ -614,6 +614,66 @@ th, td {
     z-index: 10; /* Ensure arrow appears above other elements */
 }
 
+/* -----------------------------
+   Tooltip Styling
+------------------------------ */
+
+/* Tooltip Container */
+.tooltip {
+    position: relative;
+    cursor: pointer; /* Indicates interactivity */
+    color: var(--primary-color); /* Use your primary color for consistency */
+    border-bottom: 1px dotted var(--primary-color); /* Underline to indicate tooltip */
+    font-weight: bold; /* Optional: Make label text bold */
+}
+
+/* Tooltip Text using ::after */
+.tooltip::after {
+    content: attr(data-tooltip); /* Use the data-tooltip attribute for content */
+    position: absolute;
+    bottom: 125%; /* Position the tooltip above the label */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(43, 43, 43, 0.9); /* Dark semi-transparent background */
+    color: #fff; /* White text for contrast */
+    padding: 8px;
+    border-radius: 6px;
+    width: 220px; /* Adjust as needed */
+    text-align: left;
+    font-size: 14px; /* Improve readability */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Adds depth */
+    visibility: hidden; /* Hidden by default */
+    opacity: 0; /* Fully transparent by default */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth fade-in effect */
+    z-index: 1000; /* Ensure tooltip appears above other elements */
+}
+
+/* Tooltip Arrow using ::before */
+.tooltip::before {
+    content: "";
+    position: absolute;
+    top: 100%; /* Position at the bottom of the tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px; /* Size of the arrow */
+    border-style: solid;
+    border-color: rgba(43, 43, 43, 0.9) transparent transparent transparent; /* Arrow color */
+    visibility: hidden; /* Hidden by default */
+    opacity: 0; /* Fully transparent by default */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth fade-in effect */
+    z-index: 1000; /* Ensure arrow appears above other elements */
+}
+
+/* Show Tooltip on Hover and Focus */
+.tooltip:hover::after,
+.tooltip:hover::before,
+.tooltip:focus::after,
+.tooltip:focus::before {
+    visibility: visible;
+    opacity: 1;
+}
+
+
 /* Show Tooltip on Hover */
 .remove-beneficiary-button:hover::after,
 .remove-beneficiary-button:hover::before {
