@@ -1,5 +1,3 @@
-// hereditaris-frontend/app.js
-
 // Contract Addresses
 const factoryAddress = "0xCf7211A2357aB8D7C70bBd4532eFC43f4d967575"; // InheritanceFactory on Sepolia
 
@@ -1130,6 +1128,7 @@ const convertToSeconds = (value, unit) => {
             return value; // Default is seconds
     }
 };
+
 
 // Create Inheritance Contract
 createContractForm.addEventListener('submit', async (e) => {
