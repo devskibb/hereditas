@@ -19,6 +19,29 @@
     --warm-bronze: #b5651d;
     --very-light-burgundy: rgba(139, 58, 58, 0.1);
 }
+/* Warning Message Styles */
+.warning-message {
+    display: none;
+    color: red;
+}
+
+.warning-message.show {
+    display: block;
+}
+
+/* Style for all disabled buttons */
+button:disabled {
+    opacity: 0.5; /* Makes the button appear faded */
+    cursor: not-allowed; /* Changes the cursor to indicate it's not clickable */
+}
+
+/* Optional: If you want to target only the 'Create Contract' button */
+#create-contract-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
 
 body::before {
     content: '';
