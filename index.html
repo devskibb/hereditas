@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="styles.css">
   <!-- Optional: Add viewport for responsiveness -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 <body>
   <div class="container">
@@ -30,7 +29,7 @@
       <div class="toggle-content">
         <form id="create-contract-form">
           <div id="beneficiaries-container">
-            <label>Beneficiaries and Shares (%):</label>
+            <label class="tooltip" data-tooltip="The addresses of beneficiaries and their respective share %s. Note that total shares must add up to 100%">Beneficiaries and Share %:</label>
             <div class="beneficiary-group">
               <input type="text" class="beneficiary-address" placeholder="Beneficiary Address (0x...)" required>
               <input type="number" class="beneficiary-share" placeholder="Share (%)" required>
@@ -38,8 +37,10 @@
           </div>
           <button type="button" id="add-beneficiary">Add Another Beneficiary</button>
           <br><br>
+          
+          <!-- Inactivity Period Label with Tooltip -->
           <div class="period-group">
-            <label>Inactivity Period:</label>
+            <label class="tooltip" data-tooltip="The duration of inactivity after which the inheritance may be distributed by beneficiaries.">Inactivity Period:</label>
             <div class="period-input-group">
               <input type="number" id="inactivity-period" value="1" required>
               <select id="inactivity-period-unit">
@@ -51,8 +52,9 @@
             </div>
           </div>
 
+          <!-- Grace Period Label with Tooltip -->
           <div class="period-group">
-            <label>Grace Period:</label>
+            <label class="tooltip" data-tooltip="The additional time after the inactivity period, after which anyone can distribute the funds to earn 1% of all assets.">Grace Period:</label>
             <div class="period-input-group">
               <input type="number" id="grace-period" value="1" required>
               <select id="grace-period-unit">
@@ -64,7 +66,8 @@
             </div>
           </div>
 
-          <label for="eth-deposit">Initial ETH Deposit (optional):</label>
+          <!-- Initial ETH Deposit Label with Tooltip -->
+          <label class="tooltip" data-tooltip="The amount of ETH to deposit initially into the inheritance contract. This is optional.">Initial ETH Deposit (optional):</label>
           <input type="number" id="eth-deposit" value="10" step="0.01" required>
 
           <button type="submit">Create Contract</button>
