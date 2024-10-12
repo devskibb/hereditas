@@ -1074,44 +1074,15 @@ async function displayUserContracts(factoryContractReadOnly, userAddress) {
     }
 }
 
+// DOM Elements
+const createContractButton = document.getElementById('create-contract-button');
+const shareWarning = document.getElementById('share-warning');
 
 
 // DOM Elements for Create Contract
 const addBeneficiaryButton = document.getElementById('add-beneficiary');
 const beneficiariesContainer = document.getElementById('beneficiaries-container');
 
-// Add New Beneficiary Field
-addBeneficiaryButton.addEventListener('click', () => {
-    const beneficiaryGroup = document.createElement('div');
-    beneficiaryGroup.className = 'beneficiary-group';
-    beneficiaryGroup.innerHTML = `
-        <input type="text" class="beneficiary-address" placeholder="Beneficiary Address (0x...)" required>
-        <input type="number" class="beneficiary-share" placeholder="Share (%)" required>
-    `;
-    beneficiariesContainer.appendChild(beneficiaryGroup);
-
-    // Add an event listener to adjust shares dynamically
-    beneficiaryGroup.querySelector('.beneficiary-share').addEventListener('input', adjustSharesDynamically);
-});
-
-// Adjust Shares Dynamically
-function adjustSharesDynamically() {
-    const beneficiaryShares = document.querySelectorAll('.beneficiary-share');
-    const totalShares = Array.from(beneficiaryShares).reduce((sum, input) => sum + parseFloat(input.value || 0), 0);
-
-    if (totalShares > 100) {
-        const excess = totalShares - 100;
-
-        // Distribute the excess among other beneficiaries proportionally
-        beneficiaryShares.forEach((input) => {
-            if (input !== this && totalShares !== 0) {
-                const shareValue = parseFloat(input.value || 0);
-                const adjustedValue = shareValue - (excess * (shareValue / totalShares));
-                input.value = Math.max(0, adjustedValue).toFixed(2); // Ensuring the value does not go below 0
-            }
-        });
-    }
-}
 
 // Helper to Convert Time Units to Seconds
 const convertToSeconds = (value, unit) => {
@@ -1128,6 +1099,59 @@ const convertToSeconds = (value, unit) => {
             return value; // Default is seconds
     }
 };
+
+// Event Listener for Beneficiary Share Inputs
+document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('beneficiary-share')) {
+        validateTotalShares();
+    }
+});
+
+// Add New Beneficiary Field
+addBeneficiaryButton.addEventListener('click', () => {
+    const beneficiaryGroup = document.createElement('div');
+    beneficiaryGroup.className = 'beneficiary-group';
+    beneficiaryGroup.innerHTML = `
+        <input type="text" class="beneficiary-address" placeholder="Beneficiary Address (0x...)" required>
+        <input type="number" class="beneficiary-share" placeholder="Share (%)" required>
+    `;
+    beneficiariesContainer.appendChild(beneficiaryGroup);
+
+    // Add event listener to new share input
+    beneficiaryGroup.querySelector('.beneficiary-share').addEventListener('input', validateTotalShares);
+});
+
+
+function validateTotalShares() {
+    const beneficiaryShares = document.querySelectorAll('.beneficiary-share');
+    let totalShares = 0;
+
+    beneficiaryShares.forEach(input => {
+        const shareValue = parseFloat(input.value) || 0;
+        totalShares += shareValue;
+    });
+
+    // Round totalShares to avoid floating point precision issues
+    totalShares = Math.round(totalShares * 1000000) / 1000000; // Round to 6 decimal places
+
+    if (createContractButton && shareWarning) {
+        const epsilon = 0.0001;
+        if (Math.abs(totalShares - 100) < epsilon) {
+            // Total shares are valid
+            createContractButton.disabled = false;
+            shareWarning.style.display = 'none';
+            shareWarning.textContent = '';
+        } else {
+            // Total shares are invalid
+            createContractButton.disabled = true;
+            shareWarning.style.display = 'block';
+            shareWarning.textContent = `Total shares must add up to 100%. Current total: ${totalShares.toFixed(2)}%`;
+        }
+    } else {
+        console.warn("createContractButton or shareWarning element is missing.");
+    }
+}
+
 
 
 // Create Inheritance Contract
