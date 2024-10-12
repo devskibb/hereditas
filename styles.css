@@ -1,12 +1,11 @@
 /* hereditaris-frontend/styles.css */
 
-/* Import the Cinzel font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
 :root {
-    --primary-color: #8b3a3a; /* Rich burgundy */
-    --secondary-color: #b5651d; /* Warm bronze */
-    --accent-color: #4caf50; /* Rich green */
+    --primary-color: #8b3a3a;
+    --secondary-color: #b5651d;
+    --accent-color: #4caf50;
     --text-color: #2b2b2b;
     --background-color: #f4f0e6;
     --container-bg: #fffefc;
@@ -21,25 +20,22 @@
     --very-light-burgundy: rgba(139, 58, 58, 0.1);
 }
 
-/* Global Styles */
-/* Pseudo-element for Background Image */
 body::before {
     content: '';
-    position: fixed; /* Fixed position to keep it static during scrolling */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../ROMEIMG.jpg'); /* Adjust the path if necessary */
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-position: center center; /* Centers the image */
-    opacity: 0.8; /* Adjust this value between 0 (transparent) and 1 (opaque) */
-    z-index: -1; /* Places the image behind all other content */
-    pointer-events: none; /* Allows clicks to pass through the image */
+    background-image: url('../ROMEIMG.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.8;
+    z-index: -1;
+    pointer-events: none;
 }
 
-/* Optional: Add an overlay to enhance readability */
 body::after {
     content: '';
     position: fixed;
@@ -47,14 +43,14 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 7, 7, 0.582); /* Semi-transparent white overlay */
+    background-color: rgba(10, 7, 7, 0.582);
     z-index: -1;
     pointer-events: none;
 }
 
 .divider {
     width: 20%;
-    height: 2px; /* You can temporarily increase this for testing */
+    height: 2px;
     background-color: var(--primary-color);
     margin: 10px auto;
     border-radius: 3px;
@@ -77,64 +73,61 @@ body::after {
     100% { transform: translateX(-100%); }
 }
 
-/* Container styling */
 .container {
     width: 80%;
     max-width: 1200px;
     margin: auto;
     padding: 20px;
-    background-color: #fffefc; /* Light parchment-like background */
-    border: 2px solid #8b3a3a; /* Soft earthy border */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Slightly stronger shadow for depth */
+    background-color: #fffefc;
+    border: 2px solid #8b3a3a;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 8px;
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
-/* Cursor and hover effect for toggle headers */
 .toggle-header {
-    text-align: center; /* Center the header text */
+    text-align: center;
     cursor: pointer;
     user-select: none;
-    position: relative; /* Establish a positioning context for the toggle icon */
-    padding: 10px 0;    /* Optional: Add vertical padding for better spacing */
+    position: relative;
+    padding: 10px 0;
+    font-family: 'Cinzel', serif; /* Ensures 'Cinzel' font is applied */
+
 }
-  .toggle-header:hover {
+
+.toggle-header:hover {
     color: #007BFF;
-  }
-  
-  /* Rotate the toggle icon when collapsed */
-  .toggle-icon {
+}
+
+.toggle-icon {
     transition: transform 0.3s ease;
-  }
-  .collapsed .toggle-icon {
+}
+
+.collapsed .toggle-icon {
     transform: rotate(-90deg);
-  }
-  
-  /* Initially hide all toggle contents */
-  .toggle-content {
+}
+
+.toggle-content {
     display: none;
     margin-top: 10px;
-  }
-  
-  /* Show the toggle content when active */
-  .active .toggle-content {
-    display: block;
-  }
+}
 
-/* Heading styles */
+.active .toggle-content {
+    display: block;
+}
+
 h1 {
     text-align: center;
     font-family: 'Cinzel', serif;
-    color: #4a2c2a; /* Deep maroon */
+    color: #4a2c2a;
     margin-bottom: 0px;
-    font-size: 3em; /* Increased font size */
-    font-weight: 200; /* Bold weight */
-    letter-spacing: 2px; /* Increased letter spacing */
-    text-transform: uppercase; /* Uppercase letters */
-    position: relative; /* For decorative underline */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.397); /* Soft shadow */
-
+    font-size: 3em;
+    font-weight: 200;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.397);
 }
 
 h1::before,
@@ -143,47 +136,43 @@ h1::after {
     display: inline-block;
     width: 30px;
     height: 4px;
-    background-color: #8b3a3a; /* Matching button color */
+    background-color: #8b3a3a;
     margin: 0 10px;
     vertical-align: middle;
     border-radius: 2px;
 }
 
-/* Subheading styles */
 h2 {
     font-family: 'Cinzel', serif;
-    color: #4a2c2a; /* Deep maroon */
+    color: #4a2c2a;
     margin-bottom: 20px;
-    font-size: 1.5em; /* Slightly smaller than h1 */
+    font-size: 1.5em;
     font-weight: 200;
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
 
 h5 {
-    margin-top: 0; /* Remove default top margin */
+    margin-top: 0;
     text-align: center;
     font-family: 'Cinzel', serif;
-    color: #4a2c2a; /* Deep maroon */
+    color: #4a2c2a;
     margin-bottom: 3px;
-    font-size: 0.75em; /* Increased font size */
-    font-weight: 100; /* Bold weight */
-    letter-spacing: 1px; /* Increased letter spacing */
-    text-transform: uppercase; /* Uppercase letters */
-    position: relative; /* For decorative underline */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.397); /* Soft shadow */
-
+    font-size: 0.75em;
+    font-weight: 100;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.397);
 }
 
-/* Labels */
 label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #5a3e3c; /* Muted maroon */
+    color: #5a3e3c;
 }
 
-/* Inputs and Textareas */
 input[type="text"],
 input[type="number"],
 textarea,
@@ -191,29 +180,27 @@ select {
     width: 100%;
     padding: 10px 12px;
     margin-bottom: 15px;
-    border: 1px solid #bfa58a; /* Soft brown border */
+    border: 1px solid #bfa58a;
     border-radius: 4px;
-    background-color: #fffaf0; /* Slightly off-white */
+    background-color: #fffaf0;
     color: #2b2b2b;
     font-family: 'Cinzel', serif;
     font-size: 16px;
     box-sizing: border-box;
 }
 
-/* Input focus state */
 input[type="text"]:focus,
 input[type="number"]:focus,
 textarea:focus,
 select:focus {
-    border-color: #a58a6b; /* Warm focus border */
+    border-color: #a58a6b;
     outline: none;
-    box-shadow: 0 0 5px rgba(165, 138, 107, 0.5); /* Subtle shadow */
+    box-shadow: 0 0 5px rgba(165, 138, 107, 0.5);
 }
 
-/* Buttons */
 button {
     padding: 10px 20px;
-    background-color: #8b3a3a; /* Rich burgundy */
+    background-color: #8b3a3a;
     border: none;
     color: #fff;
     border-radius: 4px;
@@ -224,10 +211,9 @@ button {
 }
 
 button:hover {
-    background-color: #6f2a2a; /* Darker burgundy on hover */
+    background-color: #6f2a2a;
 }
 
-/* Input-button group adjustments */
 .input-button-group {
     display: flex;
     align-items: stretch;
@@ -252,7 +238,6 @@ button:hover {
     background-color: #fffaf0;
 }
 
-
 .input-button-group button {
     padding: 0 20px;
     background-color: #8b3a3a;
@@ -267,7 +252,6 @@ button:hover {
     border-color: #6f2a2a;
 }
 
-/* Contract Card */
 .contract-card {
     background-color: #fffdf7;
     padding: 20px;
@@ -277,7 +261,6 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Contract Header */
 .contract-header {
     cursor: pointer;
     background-color: #f0e9d5;
@@ -298,7 +281,6 @@ button:hover {
     color: #4a2c2a;
 }
 
-/* Section Headers */
 .section-header {
     background-color: #f0e9d5;
     padding: 12px;
@@ -320,7 +302,6 @@ button:hover {
     color: #4a2c2a;
 }
 
-/* Section Content */
 .section-content {
     padding: 12px;
     border: 1px solid #d4c0a1;
@@ -329,18 +310,16 @@ button:hover {
     background-color: #fffaf0;
 }
 
-/* Status Message */
 .status-message {
     margin-top: 10px;
     font-style: italic;
-    color: #8b5e3c; /* Warm brown */
+    color: #8b5e3c;
 }
 
-/* Remove Beneficiary Button */
 .remove-beneficiary-button {
     background-color: transparent;
     border: none;
-    color: #a52a2a; /* Rich red */
+    color: #a52a2a;
     cursor: pointer;
     font-size: 16px;
     margin-left: 10px;
@@ -351,10 +330,9 @@ button:hover {
     color: #7a1c1c;
 }
 
-/* Heartbeat Button */
 .heartbeat-button {
     padding: 10px 20px;
-    background-color: #4caf50; /* Rich green */
+    background-color: #4caf50;
     border: none;
     color: #fff;
     border-radius: 4px;
@@ -367,7 +345,6 @@ button:hover {
     background-color: #388e3c;
 }
 
-/* Beneficiary Group */
 .beneficiary-group {
     display: flex;
     gap: 10px;
@@ -393,7 +370,6 @@ button:hover {
     flex: 1;
 }
 
-/* Period Group Styling */
 .period-group {
     margin-bottom: 15px;
 }
@@ -416,24 +392,20 @@ button:hover {
     background-color: #fffaf0;
 }
 
-/* Adjust the contract-details padding to accommodate nested accordions */
 .contract-details {
     padding: 12px 0;
 }
 
-/* Optional: Style the forms inside section-content */
 .section-content form {
     margin-bottom: 10px;
 }
 
-/* General Paragraph Styling */
 p {
     margin: 5px 0;
     color: #2b2b2b;
     font-family: 'Cinzel', serif;
 }
 
-/* List Styling */
 ul {
     list-style-type: disc;
     padding-left: 20px;
@@ -445,18 +417,16 @@ ul li {
     margin-bottom: 5px;
 }
 
-/* Error and Success Messages */
 .error {
-    color: #a52a2a; /* Rich red */
+    color: #a52a2a;
 }
 
 .success {
-    color: #4caf50; /* Rich green */
+    color: #4caf50;
 }
 
-/* Links */
 .address-link {
-    color: #b5651d; /* Warm bronze */
+    color: #b5651d;
     text-decoration: none;
 }
 
@@ -464,12 +434,10 @@ ul li {
     text-decoration: underline;
 }
 
-/* Hover Effect for Beneficiary List Items */
 ul li:hover {
-    background-color: rgba(139, 58, 58, 0.1); /* Light burgundy */
+    background-color: rgba(139, 58, 58, 0.1);
 }
 
-/* Table Styles (if any tables are used) */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -485,7 +453,6 @@ th, td {
     background-color: #fffaf0;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
     .container {
         width: 95%;
@@ -526,16 +493,14 @@ th, td {
     }
 }
 
-/* Remove default link styling for token links */
 .token-link {
-    color: inherit;          /* Inherit the text color from the parent element */
-    text-decoration: none;   /* Remove underline */
+    color: inherit;
+    text-decoration: none;
 }
 
-/* Optional: Add hover effect if desired */
 .token-link:hover {
-    text-decoration: underline; /* Underline on hover */
-    cursor: pointer;            /* Show pointer cursor on hover */
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .distribute-inheritance-section {
@@ -545,12 +510,12 @@ th, td {
 .distribute-inheritance-section .countdown-timer {
     font-weight: bold;
     margin-bottom: 10px;
-    color: #8b5e3c; /* Warm brown */
+    color: #8b5e3c;
 }
 
 .distribute-inheritance-section .distribute-button {
     padding: 10px 20px;
-    background-color: #4caf50; /* Rich green */
+    background-color: #4caf50;
     border: none;
     color: #fff;
     border-radius: 4px;
@@ -564,107 +529,96 @@ th, td {
 }
 
 .distribute-inheritance-section .distribute-button:disabled {
-    background-color: #a5d6a7; /* Light green when disabled */
+    background-color: #a5d6a7;
     cursor: not-allowed;
 }
 
-/* Tooltip Container - Remove Beneficiary Button */
 .remove-beneficiary-button {
-    position: relative; /* Establish a positioning context for the tooltip */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    border: none; /* Remove default button border */
-    background: none; /* Remove default button background */
-    color: var(--rich-red, red); /* Set button color, adjust as needed */
-    padding: 5px; /* Add padding for better click area */
-    font-size: 16px; /* Adjust icon size if necessary */
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--rich-red, red);
+    padding: 5px;
+    font-size: 16px;
 }
 
-/* Tooltip Text */
 .remove-beneficiary-button::after {
-    content: "Remove a beneficiary"; /* Tooltip text */
+    content: "Remove a beneficiary";
     position: absolute;
-    bottom: 125%; /* Position above the button */
+    bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black background */
-    color: #fff; /* White text */
-    padding: 5px 8px; /* Padding inside the tooltip */
-    border-radius: 4px; /* Rounded corners */
-    white-space: nowrap; /* Prevent text from wrapping */
-    font-size: 12px; /* Tooltip text size */
-    opacity: 0; /* Initially invisible */
-    visibility: hidden; /* Initially hidden */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Fade-in effect */
-    z-index: 10; /* Ensure tooltip appears above other elements */
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10;
 }
 
-/* Tooltip Arrow */
 .remove-beneficiary-button::before {
     content: "";
     position: absolute;
-    bottom: 115%; /* Position just below the tooltip text */
+    bottom: 115%;
     left: 50%;
     transform: translateX(-50%);
-    border-width: 5px; /* Size of the arrow */
+    border-width: 5px;
     border-style: solid;
-    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent; /* Arrow color */
-    opacity: 0; /* Initially invisible */
-    visibility: hidden; /* Initially hidden */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Fade-in effect */
-    z-index: 10; /* Ensure arrow appears above other elements */
+    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10;
 }
 
-/* -----------------------------
-   Tooltip Styling
------------------------------- */
-
-/* Tooltip Container */
 .tooltip {
     position: relative;
-    cursor: pointer; /* Indicates interactivity */
-    color: var(--primary-color); /* Use your primary color for consistency */
-    border-bottom: 1px dotted var(--primary-color); /* Underline to indicate tooltip */
-    font-weight: bold; /* Optional: Make label text bold */
+    cursor: pointer;
+    color: var(--primary-color);
+    border-bottom: 1px dotted var(--primary-color);
+    font-weight: bold;
 }
 
-/* Tooltip Text using ::after */
 .tooltip::after {
-    content: attr(data-tooltip); /* Use the data-tooltip attribute for content */
+    content: attr(data-tooltip);
     position: absolute;
-    bottom: 125%; /* Position the tooltip above the label */
+    bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(43, 43, 43, 0.9); /* Dark semi-transparent background */
-    color: #fff; /* White text for contrast */
+    background-color: rgba(43, 43, 43, 0.9);
+    color: #fff;
     padding: 8px;
     border-radius: 6px;
-    width: 220px; /* Adjust as needed */
+    width: 220px;
     text-align: left;
-    font-size: 14px; /* Improve readability */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Adds depth */
-    visibility: hidden; /* Hidden by default */
-    opacity: 0; /* Fully transparent by default */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth fade-in effect */
-    z-index: 1000; /* Ensure tooltip appears above other elements */
+    font-size: 14px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
 }
 
-/* Tooltip Arrow using ::before */
 .tooltip::before {
     content: "";
     position: absolute;
-    top: 100%; /* Position at the bottom of the tooltip */
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border-width: 5px; /* Size of the arrow */
+    border-width: 5px;
     border-style: solid;
-    border-color: rgba(43, 43, 43, 0.9) transparent transparent transparent; /* Arrow color */
-    visibility: hidden; /* Hidden by default */
-    opacity: 0; /* Fully transparent by default */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth fade-in effect */
-    z-index: 1000; /* Ensure arrow appears above other elements */
+    border-color: rgba(43, 43, 43, 0.9) transparent transparent transparent;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
 }
 
-/* Show Tooltip on Hover and Focus */
 .tooltip:hover::after,
 .tooltip:hover::before,
 .tooltip:focus::after,
@@ -673,10 +627,68 @@ th, td {
     opacity: 1;
 }
 
+.tooltip:focus {
+    outline: 2px dashed var(--secondary-color);
+}
 
-/* Show Tooltip on Hover */
 .remove-beneficiary-button:hover::after,
 .remove-beneficiary-button:hover::before {
-    opacity: 1; /* Make tooltip visible */
-    visibility: visible; /* Make tooltip visible */
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Apply 'Cinzel' font to ordered lists */
+ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+    color: #2b2b2b;
+    font-family: 'Cinzel', serif;
+}
+
+ol li {
+    margin-bottom: 5px;
+    font-family: 'Cinzel', serif; /* Ensure list items inherit the font */
+}
+
+/* Navbar Styles */
+.navbar {
+    width: 30%;
+    margin: 0 auto;
+    background-color: var(--container-bg);
+    border-bottom: 2px solid var(--border-color);
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Vertically centers the items */
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+
+.nav-link {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2em;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color);
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-link {
+        font-size: 1em;
+    }
 }
