@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hereditas Protocol FAQ</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+      </nav>
+      
+  <div class="container">
+    <h1>Frequently Asked Questions</h1>
+    
+    <div class="divider"></div>
+    
+    <section class="faq-section">
+      <h2 class="toggle-header">1. What is Hereditas?</h2>
+      <div class="toggle-content">
+        <p>Hereditas is a decentralized protocol designed to streamline and secure the process of digital asset inheritance on the blockchain. By leveraging smart contracts, Hereditas ensures that your digital assets, such as Ether (ETH) and ERC20 tokens, are distributed according to your wishes automatically upon predefined conditions, such as inactivity periods or specific triggers.</p>
+      </div>
+      
+      <h2 class="toggle-header">2. How Does Hereditas Work?</h2>
+      <div class="toggle-content">
+        <p>Hereditas operates through <strong>Inheritance Contracts</strong>, which are smart contracts deployed on the blockchain. As the contract owner, you can:</p>
+        <ul>
+          <li><strong>Define Beneficiaries:</strong> Specify who will inherit your assets and their respective shares.</li>
+          <li><strong>Set Inactivity and Grace Periods:</strong> Determine the duration of inactivity after which the inheritance process is initiated and an additional grace period during which only beneficiaries can act.</li>
+          <li><strong>Deposit Assets:</strong> Transfer Ether (ETH) and ERC20 tokens into the contract to be distributed upon triggering conditions.</li>
+          <li><strong>Manage Beneficiaries:</strong> Add or remove beneficiaries, with the contract automatically adjusting the shares of existing beneficiaries proportionally.</li>
+          <li><strong>Distribute Assets:</strong> Upon meeting the conditions, assets are automatically distributed to beneficiaries, ensuring a transparent and tamper-proof process.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">3. What Are the Key Features of Hereditas?</h2>
+      <div class="toggle-content">
+        <ul>
+          <li><strong>Automated Asset Distribution:</strong> Ensures timely and accurate distribution of digital assets without the need for intermediaries.</li>
+          <li><strong>Customizable Conditions:</strong> Set specific inactivity periods and grace periods tailored to your needs.</li>
+          <li><strong>Security:</strong> Utilizes OpenZeppelin’s ReentrancyGuard to protect against common smart contract vulnerabilities.</li>
+          <li><strong>Flexibility:</strong> Supports both ETH and ERC20 tokens, allowing for a wide range of digital assets to be included.</li>
+          <li><strong>Beneficiary Management:</strong> Easily add or remove beneficiaries, with automatic proportional adjustments to remaining beneficiaries' shares.</li>
+          <li><strong>Developer Fee Structure:</strong> Incorporates a transparent fee system for developers involved in the asset distribution process.</li>
+          <li><strong>Executor Fee:</strong> A 1% fee is applied at the point of asset distribution for executors who initiate the process after the grace period.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">4. How Do I Create an Inheritance Contract?</h2>
+      <div class="toggle-content">
+        <ol>
+          <li><strong>Connect Your Wallet:</strong> Use a compatible Ethereum wallet (e.g., MetaMask) to connect to the Hereditas platform.</li>
+          <li><strong>Fill Out the Form:</strong>
+            <ul>
+              <li><strong>Beneficiaries:</strong> Enter the addresses of your beneficiaries and allocate their respective shares.</li>
+              <li><strong>Inactivity Period:</strong> Define the duration of inactivity after which the inheritance process begins.</li>
+              <li><strong>Grace Period:</strong> Set an additional period during which only beneficiaries can initiate distribution.</li>
+              <li><strong>Initial ETH Deposit (Optional):</strong> Specify an amount of ETH to be deposited into the contract initially.</li>
+            </ul>
+          </li>
+          <li><strong>Submit the Contract:</strong> Confirm and deploy the contract. A developer fee will be deducted automatically from all ETH deposits.</li>
+          <li><strong>Manage Your Contract:</strong> Once deployed, you can view, manage, and monitor your contract through the Hereditas dashboard.</li>
+        </ol>
+      </div>
+      
+      <h2 class="toggle-header">5. What Assets Are Supported by Hereditas?</h2>
+      <div class="toggle-content">
+        <p>Hereditas supports:</p>
+        <ul>
+          <li><strong>Ether (ETH):</strong> The native cryptocurrency of the Ethereum blockchain.</li>
+          <li><strong>ERC20 Tokens:</strong> Any token compliant with the ERC20 standard, allowing for a diverse range of digital assets to be included in your inheritance contract.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">6. How Are Assets Deposited into the Contract?</h2>
+      <div class="toggle-content">
+        <p><strong>Ether (ETH):</strong> You can send ETH directly to the contract during creation or through subsequent deposits. <strong>All ETH deposits are charged a 0.1% developer fee.</strong></p>
+        
+        <p><strong>ERC20 Tokens:</strong></p>
+        <ul>
+          <li><strong>Initial Deposit:</strong> To enable asset distribution for a specific ERC20 token, you must deposit it <strong>through the contract at least once</strong>. This action allows the contract to distribute the asset to beneficiaries.</li>
+          <li><strong>Subsequent Deposits:</strong> After the initial deposit, you can deposit ERC20 tokens <strong>directly to the contract’s address</strong> without incurring the developer fee. This method allows users to bypass the fee for future deposits of the same ERC20 token.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">7. What Happens If I Deposit an ERC20 Without Registering It Through the Contract?</h2>
+      <div class="toggle-content">
+        <p>If you deposit an ERC20 token directly to the contract’s address <strong>without registering it through the contract at least once</strong>, the assets <strong>will not be distributed</strong> to your beneficiaries. To ensure that your ERC20 tokens are eligible for distribution:</p>
+        <ol>
+          <li><strong>Register the Token:</strong>
+            <p>Deposit the ERC20 token <strong>through the contract at least once</strong>. This action registers the token, enabling the contract to manage and distribute it to beneficiaries.</p>
+          </li>
+          <li><strong>Post-Registration Deposits:</strong>
+            <p>After registering, you can deposit the same ERC20 token <strong>directly to the contract’s address</strong> in future transactions without paying the developer fee. These deposits will be eligible for distribution as registered assets.</p>
+          </li>
+        </ol>
+        <p><strong>Note:</strong> If you accidentally deposit an ERC20 token directly without registering it first, you can still register the token by making a deposit through the contract afterward. Once registered, the previously deposited tokens can be distributed to beneficiaries.</p>
+      </div>
+      
+      <h2 class="toggle-header">8. What Is the Grace Period?</h2>
+      <div class="toggle-content">
+        <p>The <strong>Grace Period</strong> is an additional timeframe following the inactivity period. During this period:</p>
+        <ul>
+          <li><strong>Beneficiaries:</strong> Only designated beneficiaries can initiate the distribution of assets.</li>
+          <li><strong>Executors:</strong> After the grace period, executors (non-beneficiaries) can also trigger the distribution, subject to a <strong>1% executor fee</strong> deducted from all assets being distributed.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">9. How Are Developer and Executor Fees Calculated?</h2>
+      <div class="toggle-content">
+        <p>Hereditas incorporates a transparent fee structure:</p>
+        <ul>
+          <li><strong>Developer Fee:</strong> A <strong>0.1%</strong> fee is automatically deducted from <strong>all ETH deposits</strong> made through the contract. This fee supports the ongoing development and maintenance of the Hereditas protocol.</li>
+          <li><strong>Executor Fee:</strong> A <strong>1%</strong> fee is applied at the point of asset distribution for executors who initiate the process after the grace period.</li>
+        </ul>
+        
+        <p><strong>Additional Notes:</strong></p>
+        <ul>
+          <li><strong>ERC20 Deposits:</strong> The developer fee is only applicable during the <strong>initial deposit through the contract</strong> to register the ERC20 token. Subsequent direct deposits of the same ERC20 token to the contract’s address <strong>do not incur</strong> the developer fee.</li>
+          <li><strong>Fee Transparency:</strong> All fees are automatically deducted during transactions, ensuring users are aware of the deductions without manual intervention.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">10. Can I Update or Cancel My Inheritance Contract?</h2>
+      <div class="toggle-content">
+        <p>Yes, as the contract owner, you have the authority to:</p>
+        <ul>
+          <li><strong>Add or Remove Beneficiaries:</strong> Modify the list of beneficiaries. When adding or removing beneficiaries, the contract automatically adjusts the shares of existing beneficiaries proportionally to maintain the total share distribution.</li>
+          <li><strong>Update Periods:</strong> Change the inactivity and grace periods as needed.</li>
+          <li><strong>Withdraw Assets:</strong> Before distribution, you can withdraw deposited assets from the contract.</li>
+        </ul>
+        <p><strong>Note:</strong> Once assets have been distributed (<code>isDistributed</code> flag is set to <code>TRUE</code>), certain actions, like modifying beneficiaries or withdrawing assets, are restricted to maintain the integrity of the distribution process.</p>
+      </div>
+      
+      <h2 class="toggle-header">11. How Secure Is Hereditas?</h2>
+      <div class="toggle-content">
+        <p>Hereditas is built with security as a priority:</p>
+        <ul>
+          <li><strong>Smart Contract Audits:</strong> Utilizes well-audited OpenZeppelin contracts to prevent vulnerabilities.</li>
+          <li><strong>Reentrancy Protection:</strong> Implements <code>ReentrancyGuard</code> to safeguard against reentrancy attacks.</li>
+          <li><strong>Immutable Developer Address:</strong> Ensures that the developer fee recipient cannot be altered post-deployment.</li>
+          <li><strong>Transparent Operations:</strong> All transactions and distributions are recorded on the blockchain, ensuring transparency and immutability.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">12. What Happens If I Want to Change My Beneficiaries?</h2>
+      <div class="toggle-content">
+        <p>While you <strong>cannot directly change</strong> the shares of existing beneficiaries, you can:</p>
+        <ul>
+          <li><strong>Add Beneficiaries:</strong> Introduce new beneficiaries and assign their shares. The contract will automatically adjust the shares of existing beneficiaries proportionally to accommodate the new allocation.</li>
+          <li><strong>Remove Beneficiaries:</strong> Eliminate existing beneficiaries from the contract. The contract will automatically redistribute their shares proportionally among the remaining beneficiaries.</li>
+        </ul>
+        <p><strong>Note:</strong> The total shares must always sum up to 100% (10,000 basis points). The system ensures proportional adjustments to maintain this balance.</p>
+      </div>
+      
+      <h2 class="toggle-header">13. What Are "Interactions" with the Contract and How Do They Reset the Inactivity Period?</h2>
+      <div class="toggle-content">
+        <p><strong>Interactions</strong> with the contract are any actions that indicate activity and reset the inactivity period. These interactions include:</p>
+        <ul>
+          <li><strong>Deposits:</strong> Adding ETH or ERC20 tokens to the contract.</li>
+          <li><strong>Withdrawals:</strong> Removing ETH or ERC20 tokens from the contract.</li>
+          <li><strong>Managing Beneficiaries:</strong> Adding or removing beneficiaries.</li>
+          <li><strong>Heartbeat Function:</strong> Manually resetting the inactivity period without performing any other actions.</li>
+        </ul>
+        <p>Each of these interactions updates the <code>lastActiveTimestamp</code>, effectively resetting the inactivity period countdown. This mechanism ensures that the inheritance process is only initiated when there has been no activity for the specified inactivity period.</p>
+        
+        <p><strong>Examples of Interactions:</strong></p>
+        <ol>
+          <li><strong>Depositing ETH or ERC20 Tokens:</strong>
+            <p>Every deposit transaction updates the <code>lastActiveTimestamp</code>, preventing the inheritance process from being triggered prematurely.</p>
+          </li>
+          <li><strong>Withdrawing Assets:</strong>
+            <p>When the owner withdraws assets from the contract, it signifies active management, thereby resetting the inactivity timer.</p>
+          </li>
+          <li><strong>Adding or Removing Beneficiaries:</strong>
+            <p>Modifying the list of beneficiaries indicates that the contract owner is actively managing the inheritance plan, resetting the inactivity period.</p>
+          </li>
+          <li><strong>Heartbeat Function:</strong>
+            <p>If available, this function allows the owner to reset the inactivity period without making any other changes, ensuring the inheritance process remains inactive.</p>
+          </li>
+        </ol>
+        
+        <p><strong>Importance of Interactions:</strong></p>
+        <p>Regular interactions prevent the unintended initiation of the inheritance process by signaling ongoing management and activity by the contract owner.</p>
+      </div>
+      
+      <h2 class="toggle-header">14. Can I Distribute Assets Early?</h2>
+      <div class="toggle-content">
+        <p>No, assets can only be distributed after the defined inactivity and grace periods have been met. This ensures that the inheritance process is only triggered under the specified conditions, maintaining the contract’s integrity.</p>
+      </div>
+      
+      <h2 class="toggle-header">15. Which Blockchain Does Hereditas Operate On?</h2>
+      <div class="toggle-content">
+        <p>Hereditas is deployed on the <strong>Ethereum</strong> blockchain, leveraging its robust infrastructure and widespread adoption to ensure reliability and security.</p>
+      </div>
+      
+      <h2 class="toggle-header">16. How Do I Connect My Wallet to Hereditas?</h2>
+      <div class="toggle-content">
+        <ol>
+          <li><strong>Install a Compatible Wallet:</strong> Use wallets like <a href="https://metamask.io/" class="address-link">MetaMask</a> or <a href="https://walletconnect.com/" class="address-link">WalletConnect</a>.</li>
+          <li><strong>Navigate to Hereditas:</strong> Visit the Hereditas platform through your web browser.</li>
+          <li><strong>Click "Connect Wallet":</strong> Initiate the connection process.</li>
+          <li><strong>Authorize Connection:</strong> Follow the prompts in your wallet to grant Hereditas access.</li>
+          <li><strong>Start Managing Contracts:</strong> Once connected, you can create, view, and manage your inheritance contracts.</li>
+        </ol>
+      </div>
+      
+      <h2 class="toggle-header">17. Are There Any Fees for Using Hereditas?</h2>
+      <div class="toggle-content">
+        <p>Yes, Hereditas incorporates a transparent fee structure:</p>
+        <ul>
+          <li><strong>Developer Fees:</strong> A small percentage (<strong>0.1%</strong>) of <strong>all ETH deposits</strong> is allocated to the developer upon depositing assets through the contract.</li>
+          <li><strong>Executor Fees:</strong> Executors (non-beneficiaries who trigger distribution) incur a <strong>1%</strong> fee at the point of asset distribution.</li>
+        </ul>
+        
+        <p><strong>Additional Notes:</strong></p>
+        <ul>
+          <li><strong>ERC20 Deposits:</strong> The developer fee is only applicable during the <strong>initial deposit through the contract</strong> to enable asset distribution. Subsequent direct deposits of the same ERC20 token to the contract’s address <strong>do not incur</strong> the developer fee.</li>
+          <li><strong>Fee Transparency:</strong> All fees are automatically deducted during transactions, ensuring users are aware of the deductions without manual intervention.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">18. How Can I Ensure the Privacy of My Inheritance Contract?</h2>
+      <div class="toggle-content">
+        <p>While Hereditas operates on a public blockchain, you can take the following steps to enhance privacy:</p>
+        <ul>
+          <li><strong>Use a Dedicated Wallet:</strong> Create a separate wallet specifically for your inheritance contracts.</li>
+          <li><strong>Manage Access:</strong> Only share your contract details with trusted beneficiaries.</li>
+          <li><strong>Avoid Sharing Sensitive Information:</strong> Do not include personally identifiable information within the contract parameters.</li>
+        </ul>
+        <p><strong>Note:</strong> Blockchain transactions are inherently transparent, so exercise caution when handling sensitive data.</p>
+      </div>
+      
+      <h2 class="toggle-header">19. Can I Include Multiple Types of Assets in a Single Contract?</h2>
+      <div class="toggle-content">
+        <p>Yes, you can include both Ether (ETH) and multiple ERC20 tokens within a single inheritance contract. This allows for diversified asset distribution according to your preferences.</p>
+      </div>
+      
+      <h2 class="toggle-header">20. What Happens to the Contract After Distribution?</h2>
+      <div class="toggle-content">
+        <p>Once assets are distributed:</p>
+        <ul>
+          <li><strong><code>isDistributed</code> Flag:</strong> Set to <code>TRUE</code>, preventing any further distributions.</li>
+          <li><strong>Immutable State:</strong> The contract remains on the blockchain, serving as a historical record of the distribution.</li>
+          <li><strong>Contract Management:</strong> Certain actions, like modifying beneficiaries or withdrawing assets, are restricted post-distribution to maintain the contract's integrity.</li>
+        </ul>
+      </div>
+    </section>
+    
+    <div class="divider"></div>
+  </div>
+  
+  <!-- Include any necessary JavaScript for collapsible sections -->
+  <script src="faq.js"></script>
+</body>
+</html>
