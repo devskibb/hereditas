@@ -749,6 +749,8 @@ ol li {
     text-decoration: none;
     display: flex;
     align-items: center;
+    font-family: 'Cinzel', serif; /* Ensures 'Cinzel' font is applied */
+
 }
 
 /* Show the dropdown menu on hover */
