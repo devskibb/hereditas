@@ -11,15 +11,15 @@ let factoryContractReadOnly;
 const loadABIs = async () => {
     try {
         // Fetch ABI JSON file for the factory
-        const factoryResponse = await fetch('./contracts/InheritanceFactory.json');
+        const factoryResponse = await fetch('contracts/InheritanceFactory.json');
         factoryABI = await factoryResponse.json();
 
         // Fetch ABI JSON file for inheritance
-        const inheritanceResponse = await fetch('./contracts/InheritanceContract.json');
+        const inheritanceResponse = await fetch('contracts/InheritanceContract.json');
         inheritanceABI = await inheritanceResponse.json();
 
         // Fetch ERC20 ABI
-        const erc20Response = await fetch('./contracts/erc20ABI.json');
+        const erc20Response = await fetch('contracts/erc20ABI.json');
         erc20ABI = await erc20Response.json();
 
         console.log("ABIs loaded successfully.", factoryABI, inheritanceABI, erc20ABI);
