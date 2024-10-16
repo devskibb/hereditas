@@ -18,6 +18,24 @@
   <div class="container">
     <!-- Connect Wallet Section -->
     <section id="wallet-connect">
+      <!-- Network Selector Dropdown -->
+      <div id="network-selector" class="dropdown">
+        <button class="dropbtn">
+          <img id="network-icon" src="images/default-icon.png" alt="Network Icon" width="24" height="24">
+          ▼
+        </button>
+        <div class="dropdown-content">
+          <a href="#" data-network="1">
+            <img src="images/ethereum-icon.png" alt="Ethereum" width="24" height="24">
+            Ethereum Mainnet
+          </a>
+          <a href="#" data-network="8453">
+            <img src="images/base-icon.png" alt="Base" width="24" height="24">
+            Base Network
+          </a>
+        </div>
+      </div>
+
       <button id="connect-wallet">Connect Wallet</button>
       <p id="wallet-address">Not connected</p>
     </section>
