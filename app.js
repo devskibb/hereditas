@@ -1,11 +1,30 @@
 // Contract Addresses
 const factoryAddress = "0xB30e7E3ae76c3d6Be2D70ABA661cd154B61e0f39"; // InheritanceFactory on Mainnet
 
+// Network Configuration
+const networkConfig = {
+    1: { // Ethereum Mainnet
+        chainId: '0x1',
+        chainName: 'Ethereum Mainnet',
+        factoryAddress: '0xB30e7E3ae76c3d6Be2D70ABA661cd154B61e0f39',
+        rpcUrls: ['https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'], // Replace with your own Infura project ID
+        icon: 'images/ethereum-icon.png',
+    },
+    8453: { // Base Mainnet
+        chainId: '0x2105', // 8453 in hex
+        chainName: 'Base Mainnet',
+        factoryAddress: '0x5F3425B4aC63c80643D91Bf4a93771acdBE1F25C', // Replace with your actual factory address on Base network
+        rpcUrls: ['https://mainnet.base.org'], // Replace with the actual RPC URL for Base
+        icon: 'images/base-icon.png',
+    },
+};
+
 // Contract ABIs
 let factoryABI;
 let inheritanceABI;
 let erc20ABI;
 let factoryContractReadOnly;
+let currentNetworkConfig;
 
 // Load ABIs Asynchronously
 const loadABIs = async () => {
@@ -43,6 +62,9 @@ let factoryContract;
 // DOM Elements
 const connectWalletButton = document.getElementById('connect-wallet');
 const walletAddressDisplay = document.getElementById('wallet-address');
+const networkIcon = document.getElementById('network-icon');
+const networkNameDisplay = document.getElementById('network-name');
+const networkSelector = document.getElementById('network-selector');
 
 const createContractForm = document.getElementById('create-contract-form');
 const createStatus = document.getElementById('create-status');
@@ -53,6 +75,46 @@ const contractsListDiv = document.getElementById('contracts-list');
 connectWalletButton.disabled = true;
 
 let isConnected = false;
+
+// Event Listener for Network Selector Dropdown Items
+const dropdownItems = networkSelector.querySelectorAll('.dropdown-content a');
+dropdownItems.forEach(item => {
+    item.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const targetChainId = event.currentTarget.getAttribute('data-network');
+        await switchNetwork(targetChainId);
+    });
+});
+
+// Function to Switch Network
+async function switchNetwork(targetChainId) {
+    try {
+        await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: networkConfig[targetChainId].chainId }],
+        });
+        // On success, handleChainChanged will be triggered
+    } catch (switchError) {
+        if (switchError.code === 4902) {
+            // The chain has not been added to MetaMask
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [{
+                        chainId: networkConfig[targetChainId].chainId,
+                        chainName: networkConfig[targetChainId].chainName,
+                        rpcUrls: networkConfig[targetChainId].rpcUrls,
+                        // Optional: add other parameters such as nativeCurrency, blockExplorerUrls
+                    }],
+                });
+            } catch (addError) {
+                console.error('Failed to add network:', addError);
+            }
+        } else {
+            console.error('Failed to switch network:', switchError);
+        }
+    }
+}
 
 // Connect/Disconnect Wallet
 connectWalletButton.addEventListener('click', async () => {
@@ -69,18 +131,32 @@ connectWalletButton.addEventListener('click', async () => {
                 provider = new ethers.BrowserProvider(window.ethereum);
                 signer = await provider.getSigner();
 
-                // Log provider and signer to ensure they're defined
-                console.log("Provider:", provider);
-                console.log("Signer:", signer);
+                // Get Network
+                const network = await provider.getNetwork();
+                const chainId = Number(network.chainId);
+
+                // Set currentNetworkConfig based on the chainId
+                currentNetworkConfig = networkConfig[chainId];
+
+                if (!currentNetworkConfig) {
+                    alert('Unsupported network. Please switch to Ethereum Mainnet or Base Network.');
+                    // Reset network icon and name
+                    networkIcon.src = 'images/default-icon.png';
+                    networkNameDisplay.textContent = 'Unsupported Network';
+                    return;
+                }
+
+                // Update network icon and name
+                networkIcon.src = currentNetworkConfig.icon;
 
                 // Initialize Factory Contract (for reading - use provider)
                 if (!factoryABI || !Array.isArray(factoryABI)) {
                     throw new Error("Invalid Factory ABI loaded. Please check the ABI format.");
                 }
                 // Assign to global variable
-                factoryContractReadOnly = new ethers.Contract(factoryAddress, factoryABI, provider);
+                factoryContractReadOnly = new ethers.Contract(currentNetworkConfig.factoryAddress, factoryABI, provider);
                 // Contract for write operations
-                factoryContract = new ethers.Contract(factoryAddress, factoryABI, signer);
+                factoryContract = new ethers.Contract(currentNetworkConfig.factoryAddress, factoryABI, signer);
 
                 // Update UI: Change button text to "Disconnect Wallet"
                 connectWalletButton.textContent = "Disconnect Wallet";
@@ -95,10 +171,10 @@ connectWalletButton.addEventListener('click', async () => {
                 isConnected = true;
 
                 // Listen for account changes
-                window.ethereum.on('accountsChanged', handleAccountsChanged);
-
-                // Listen for network changes
-                window.ethereum.on('chainChanged', handleChainChanged);
+                if (window.ethereum && window.ethereum.on) {
+                    window.ethereum.on('accountsChanged', handleAccountsChanged);
+                    window.ethereum.on('chainChanged', handleChainChanged);
+                }
 
             } catch (error) {
                 console.error("Error connecting wallet:", error);
@@ -140,6 +216,53 @@ connectWalletButton.addEventListener('click', async () => {
     }
 });
 
+// Handle network changes
+async function handleChainChanged(_chainId) {
+    const chainId = parseInt(_chainId, 16); // Convert hex chainId to decimal
+
+    // Set currentNetworkConfig based on the chainId
+    currentNetworkConfig = networkConfig[chainId];
+
+    if (!currentNetworkConfig) {
+        alert('Unsupported network. Please switch to Ethereum Mainnet or Base Network.');
+        // Reset network icon and name
+        networkIcon.src = 'images/default-icon.png';
+        // Clear contracts lists
+        contractsListDiv.innerHTML = "<p>Unsupported network.</p>";
+        beneficiaryContractsListDiv.innerHTML = "<p>Unsupported network.</p>";
+
+        return;
+    }
+
+    // Update network icon and name
+    networkIcon.src = currentNetworkConfig.icon;
+    // Re-initialize provider and signer
+    provider = new ethers.BrowserProvider(window.ethereum);
+    signer = await provider.getSigner();
+
+    // Re-initialize Factory Contract
+    factoryContractReadOnly = new ethers.Contract(currentNetworkConfig.factoryAddress, factoryABI, provider);
+    factoryContract = new ethers.Contract(currentNetworkConfig.factoryAddress, factoryABI, signer);
+
+    // Refresh UI
+    const accounts = await provider.send('eth_accounts', []);
+    const account = accounts[0];
+
+    if (account) {
+        walletAddressDisplay.textContent = `Connected: ${account}`;
+        // Display User's Contracts
+        await displayUserContracts(factoryContractReadOnly, account);
+        // Display Contracts Where User is a Beneficiary
+        await displayBeneficiaryContracts(factoryContractReadOnly, account);
+    } else {
+        // If no accounts are connected, update UI accordingly
+        walletAddressDisplay.textContent = "Not connected";
+        connectWalletButton.textContent = "Connect Wallet";
+        isConnected = false;
+    }
+}
+
+
 
 // Function to initialize toggle behavior
 function initializeToggles() {
@@ -179,9 +302,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle account changes
 function handleAccountsChanged(accounts) {
     if (accounts.length === 0) {
-        walletAddressDisplay.textContent = "Disconnected";
-        contractsListDiv.innerHTML = "<p>Disconnected from wallet.</p>";
-        beneficiaryContractsListDiv.innerHTML = "<p>Disconnected from wallet.</p>";
+        walletAddressDisplay.textContent = "Not connected";
+        connectWalletButton.textContent = "Connect Wallet";
+        isConnected = false;
+        // Clear contracts lists
+        contractsListDiv.innerHTML = "<p>Not connected.</p>";
+        beneficiaryContractsListDiv.innerHTML = "<p>Not connected.</p>";
     } else {
         walletAddressDisplay.textContent = `Connected: ${accounts[0]}`;
         // Refresh the UI using the global factoryContractReadOnly
@@ -190,11 +316,6 @@ function handleAccountsChanged(accounts) {
     }
 }
 
-
-// Handle network changes
-function handleChainChanged(_chainId) {
-    window.location.reload();
-}
 
 // Fetch Beneficiaries using getAllBeneficiaries function
 async function getAllBeneficiaries(contract) {
