@@ -1260,7 +1260,7 @@ createContractForm.addEventListener('submit', async (e) => {
             gracePeriodSeconds,
             { 
                 value: ethers.parseEther(ethDeposit),
-                gasLimit: 10000000,
+                gasLimit: 10000000n,
             }
         );
 
