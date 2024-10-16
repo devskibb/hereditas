@@ -732,6 +732,13 @@ ol li {
     cursor: pointer;
 }
 
+/* Adjust the image inside the dropdown button */
+.dropbtn img {
+    height: 16px; /* Match the font size */
+    width: auto; /* Automatically adjust width to maintain aspect ratio */
+    vertical-align: middle; /* Vertically align the image with the text */
+}
+
 /* Dropdown Content */
 .dropdown-content {
     display: none;
