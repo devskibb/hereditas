@@ -1260,8 +1260,8 @@ createContractForm.addEventListener('submit', async (e) => {
             gracePeriodSeconds,
             { 
                 value: ethers.parseEther(ethDeposit),
-            },
-            {gasLimit: 1000000}
+                gasLimit: 10000000,
+            }
         );
 
         createStatus.textContent = "Transaction Submitted. Waiting for confirmation...";
