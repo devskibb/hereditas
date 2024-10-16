@@ -1,5 +1,5 @@
 // Contract Addresses
-const factoryAddress = "0xCf7211A2357aB8D7C70bBd4532eFC43f4d967575"; // InheritanceFactory on Sepolia
+const factoryAddress = "0xB30e7E3ae76c3d6Be2D70ABA661cd154B61e0f39"; // InheritanceFactory on Mainnet
 
 // Contract ABIs
 let factoryABI;
@@ -369,7 +369,7 @@ async function displayBeneficiaryContracts(factoryContractReadOnly, userAddress)
                         <div class="tokens-details" style="display: none;">
                             <ul>
                                 ${tokensInfo.map(token => {
-                                    const tokenEtherscanLink = `https://sepolia.etherscan.io/token/${token.tokenAddress}`;
+                                    const tokenEtherscanLink = `https://www.etherscan.io/token/${token.tokenAddress}`;
                                     return `
                                         <li>
                                             <a href="${tokenEtherscanLink}" target="_blank" class="token-link">
@@ -386,7 +386,7 @@ async function displayBeneficiaryContracts(factoryContractReadOnly, userAddress)
                     <ul>
                         ${beneficiaries.map((b) => {
                             const sharePercentage = Number(b.share) / 100; // Convert basis points to percentage
-                            const etherscanLink = `https://sepolia.etherscan.io/address/${b.beneficiaryAddress}`;
+                            const etherscanLink = `https://www.etherscan.io/address/${b.beneficiaryAddress}`;
                             return `
                                 <li>
                                     <a href="${etherscanLink}" target="_blank" class="address-link">
@@ -563,7 +563,7 @@ async function displayUserContracts(factoryContractReadOnly, userAddress) {
                         <div class="tokens-details" style="display: none;">
                             <ul>
                                 ${tokensInfo.map(token => {
-                                    const tokenEtherscanLink = `https://sepolia.etherscan.io/token/${token.tokenAddress}`;
+                                    const tokenEtherscanLink = `https://www.etherscan.io/token/${token.tokenAddress}`;
                                     return `
                                         <li>
                                             <a href="${tokenEtherscanLink}" target="_blank" class="token-link">
@@ -580,7 +580,7 @@ async function displayUserContracts(factoryContractReadOnly, userAddress) {
                     <ul>
                         ${beneficiaries.map((b) => {
                             const sharePercentage = Number(b.share) / 100; // Convert basis points to percentage
-                            const etherscanLink = `https://sepolia.etherscan.io/address/${b.beneficiaryAddress}`;
+                            const etherscanLink = `https://www.etherscan.io/address/${b.beneficiaryAddress}`;
                             return `
                                 <li>
                                     <a href="${etherscanLink}" target="_blank" class="address-link">
