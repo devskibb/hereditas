@@ -1,0 +1,138 @@
+<!-- hereditaris-frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hereditas Protocol</title>
+  <link rel="stylesheet" href="../styles.css">
+  <!-- Optional: Add viewport for responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../faq.html" class="nav-link">FAQ</a>
+      </nav>
+      
+  <div class="container">
+    <!-- Connect Wallet Section -->
+    <section id="wallet-connect">
+      <!-- Network Selector Dropdown -->
+      <div id="network-selector" class="dropdown">
+        <button class="dropbtn">
+          <img id="network-icon" src="../images/default-icon.png" alt="Network Icon" width="24" height="24">
+          ▼
+        </button>
+        <div class="dropdown-content">
+          <a href="#" data-network="1">
+            <img src="../images/ethereum-icon.png" alt="Ethereum" width="24" height="24">
+            Ethereum Mainnet
+          </a>
+          <a href="#" data-network="8453">
+            <img src="../images/base-icon.png" alt="Base" width="24" height="24">
+            Base Network
+          </a>
+        </div>
+      </div>
+
+      <button id="connect-wallet">Connect Wallet</button>
+      <p id="wallet-address">Not connected</p>
+    </section>
+
+    <h1>Hereditas</h1>
+    <h5>Your legacy, on-chain.</h5>
+    
+    <div class="divider"></div>
+    
+    <!-- Create Inheritance Contract -->
+    <section id="create-contract">
+      <h2 class="toggle-header">
+        Create New Inheritance Contract
+      </h2>
+      <div class="toggle-content">
+        <form id="create-contract-form">
+          <div id="beneficiaries-container">
+            <label class="tooltip" data-tooltip="The addresses of beneficiaries and their respective share %s. Note that total shares must add up to 100%">Beneficiaries and Share %:</label>
+            <div class="beneficiary-group">
+              <input type="text" class="beneficiary-address" placeholder="Beneficiary Address (0x...)" required>
+              <input type="number" class="beneficiary-share" placeholder="Share (%)" required>
+            </div>
+          </div>
+          <button type="button" id="add-beneficiary">Add Another Beneficiary</button>
+          <br><br>
+          
+          <!-- Inactivity Period Label with Tooltip -->
+          <div class="period-group">
+            <label class="tooltip" data-tooltip="The duration of inactivity after which the inheritance may be distributed by beneficiaries.">Inactivity Period:</label>
+            <div class="period-input-group">
+              <input type="number" id="inactivity-period" value="1" required>
+              <select id="inactivity-period-unit">
+                <option value="minutes">Minutes</option>
+                <option value="hours">Hours</option>
+                <option value="days">Days</option>
+                <option value="years">Years</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Grace Period Label with Tooltip -->
+          <div class="period-group">
+            <label class="tooltip" data-tooltip="The additional time after the inactivity period, after which anyone can distribute the funds to earn 1% of all assets.">Grace Period:</label>
+            <div class="period-input-group">
+              <input type="number" id="grace-period" value="1" required>
+              <select id="grace-period-unit">
+                <option value="minutes">Minutes</option>
+                <option value="hours">Hours</option>
+                <option value="days">Days</option>
+                <option value="years">Years</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Initial ETH Deposit Label with Tooltip -->
+          <label class="tooltip" data-tooltip="The amount of ETH to deposit initially into the inheritance contract. This is optional.">Initial ETH Deposit (optional):</label>
+          <input type="number" id="eth-deposit" value="10" step="0.01" required>
+        
+          <p id="share-warning" class="warning-message" style="display: none;"></p>
+
+          <button type="submit" id="create-contract-button" disabled>Create Contract</button>
+        </form>
+        <p id="create-status"></p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+    
+    <!-- View Inheritance Contracts -->
+    <section id="selectId">
+      <h2 class="toggle-header">
+        Your Inheritance Contracts
+      </h2>
+      <div class="toggle-content">
+        <div id="contracts-list">
+          <!-- Owned Contracts will be listed here -->
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- View Beneficiary Contracts -->
+    <section id="beneficiary-selectId">
+      <h2 class="toggle-header">
+        Contracts Where You Are a Beneficiary
+      </h2>
+      <div class="toggle-content">
+        <div id="beneficiary-contracts-list">
+          <!-- Beneficiary Contracts will be listed here -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Ethers.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.3/ethers.umd.min.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
