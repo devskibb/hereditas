@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hereditas Protocol V2 FAQ</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="faqV2.html" class="nav-link">FAQ</a>
+    </nav>
+    
+  <div class="container">
+    <h1>Frequently Asked Questions</h1>
+    
+    <div class="divider"></div>
+    
+    <section class="faq-section">
+      <h2 class="toggle-header">1. What is Hereditas Protocol V2?</h2>
+      <div class="toggle-content">
+        <p>Hereditas Protocol V2 is the latest version of our decentralized inheritance management system. It allows you to securely manage and distribute your digital assets, specifically ERC20 tokens, to your beneficiaries based on predefined conditions and time periods.</p>
+      </div>
+      
+      <h2 class="toggle-header">2. How Does Hereditas Protocol V2 Work?</h2>
+      <div class="toggle-content">
+        <p>Hereditas V2 operates through a single <strong>Inheritance Plan</strong> managed by an <strong>InheritanceManager</strong> smart contract. You can set up your plan by specifying your beneficiaries, their respective shares, and defining inactivity and grace periods. Unlike V1, your assets remain in your personal wallet until distribution is initiated, ensuring they remain liquid and under your control.</p>
+      </div>
+      
+      <h2 class="toggle-header">3. What Are the Key Features of Hereditas Protocol V2?</h2>
+      <div class="toggle-content">
+        <ul>
+          <li><strong>Single Inheritance Plan:</strong> Manage one inheritance plan at a time, simplifying asset distribution.</li>
+          <li><strong>ERC20 Token Support Only:</strong> Exclusively supports ERC20 tokens, ensuring compatibility and security.</li>
+          <li><strong>Fee Structure:</strong> Developer and executor fees are only deducted during the asset distribution process.</li>
+          <li><strong>Liquid Assets:</strong> Assets remain in your personal wallet until you choose to distribute them, maintaining liquidity and control.</li>
+          <li><strong>Automatic Contract Deletion:</strong> After assets are distributed, the inheritance contract is automatically deleted from the blockchain, ensuring privacy and security.</li>
+          <li><strong>Secure and Transparent:</strong> Built with robust security measures to protect your assets and ensure transparent operations.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">4. How Do I Create an Inheritance Plan in V2?</h2>
+      <div class="toggle-content">
+        <ol>
+          <li><strong>Connect Your Wallet:</strong> Use a compatible Ethereum wallet (e.g., MetaMask) to connect to the Hereditas platform.</li>
+          <li><strong>Access the Dashboard:</strong> Navigate to the Hereditas dashboard where you can manage your inheritance plan.</li>
+          <li><strong>Create a New Plan:</strong>
+            <ul>
+              <li><strong>Beneficiaries:</strong> Enter the addresses of your beneficiaries and assign their respective shares.</li>
+              <li><strong>Inactivity Period:</strong> Define the period of inactivity (in days) after which the inheritance process begins.</li>
+              <li><strong>Grace Period:</strong> Set an additional period (in days) during which only beneficiaries can initiate distribution.</li>
+              <li><strong>Approve ERC20 Tokens:</strong> Register any ERC20 tokens you wish to include in the plan through the approval process.</li>
+            </ul>
+          </li>
+          <li><strong>Submit the Plan:</strong> Confirm and deploy the inheritance plan. Developer and executor fees will be automatically deducted during the distribution process.</li>
+          <li><strong>Manage Your Plan:</strong> Use the dashboard to view, update, or delete your inheritance plan as needed.</li>
+        </ol>
+      </div>
+      
+      <h2 class="toggle-header">5. What Assets Are Supported by Hereditas Protocol V2?</h2>
+      <div class="toggle-content">
+        <p>Hereditas V2 exclusively supports ERC20 tokens. Unlike V1, native ETH is not supported to ensure greater compatibility and security with a wide range of digital assets.</p>
+        <ul>
+          <li><strong>ERC20 Tokens:</strong> Any token that complies with the ERC20 standard, allowing for a diverse range of digital assets to be included in your inheritance plan.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">6. Why is native ETH not supported?</h2>
+      <div class="toggle-content">
+        <p>Native ETH is not supported because it doesn't utilize the approval mechanism required for secure asset management and distribution. Instead, users can use Wrapped Ether (WETH), which is an ERC20-compliant version of ETH. WETH allows for seamless integration with the approval system, ensuring that your assets are managed securely within your inheritance plan.</p>
+      </div>
+      
+      <h2 class="toggle-header">7. How Are Assets Managed in Hereditas Protocol V2?</h2>
+      <div class="toggle-content">
+        <p>Unlike V1, assets are not deposited directly into the inheritance contract. Instead, they remain in your personal wallet until you choose to distribute them. This approach ensures that your assets remain liquid and under your control until the distribution conditions are met.</p>
+        <ul>
+          <li><strong>ERC20 Tokens:</strong> Approve the inheritance contract to access your ERC20 tokens. The tokens remain in your wallet and are only transferred to beneficiaries during the distribution process.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">8. How Do I Register an ERC20 Token in V2?</h2>
+      <div class="toggle-content">
+        <ol>
+          <li><strong>Navigate to Manage Tokens:</strong> Within your inheritance plan, go to the "Manage Tokens" section.</li>
+          <li><strong>Enter Token Details:</strong>
+            <ul>
+              <li><strong>Token Address:</strong> Input the ERC20 token contract address.</li>
+              <li><strong>Amount to Approve:</strong> Specify the amount of tokens you wish to approve for the inheritance contract.</li>
+            </ul>
+          </li>
+          <li><strong>Approve Tokens:</strong> Click the "Approve" button to authorize the inheritance contract to handle the specified amount of tokens.</li>
+          <li><strong>Register Tokens:</strong> Once approved, you can register the token for inclusion in the inheritance plan by clicking "Register".</li>
+          <li><strong>Manage Registered Tokens:</strong> View and unregister tokens as needed through the "Registered Tokens" list.</li>
+        </ol>
+        <p><strong>Note:</strong> Tokens must be <strong>registered</strong> after approval. If you unregister a token, it will <strong>NOT</strong> be included during distribution, even if the approval is still active.</p>
+      </div>
+      
+      <h2 class="toggle-header">9. What Is the Grace Period?</h2>
+      <div class="toggle-content">
+        <p>The <strong>Grace Period</strong> is an additional timeframe following the inactivity period. During this period:</p>
+        <ul>
+          <li><strong>Beneficiaries:</strong> Only designated beneficiaries can initiate the distribution of assets.</li>
+          <li><strong>Executors:</strong> After the grace period, executors (non-beneficiaries) can also trigger the distribution, subject to a <strong>1% executor fee</strong> deducted from the distributed assets.</li>
+        </ul>
+        <p>This ensures that your assets are distributed smoothly while providing flexibility in case of unforeseen circumstances.</p>
+      </div>
+      
+      <h2 class="toggle-header">10. How Are Developer and Executor Fees Calculated?</h2>
+      <div class="toggle-content">
+        <p>Hereditas Protocol V2 incorporates a transparent fee structure that is only applied during the asset distribution process:</p>
+        <ul>
+          <li><strong>Developer Fee:</strong> A <strong>0.1%</strong> fee is automatically deducted from the total assets being distributed. This fee supports the ongoing development and maintenance of the Hereditas protocol.</li>
+          <li><strong>Executor Fee:</strong> A <strong>1%</strong> fee is applied when executors (non-beneficiaries) initiate the distribution after the grace period.</li>
+        </ul>
+        <p><strong>Additional Notes:</strong></p>
+        <ul>
+          <li><strong>ERC20 Tokens:</strong> Fees are only deducted from ERC20 token distributions and are transparent in all transactions.</li>
+          <li><strong>Fee Transparency:</strong> All fees are clearly displayed during the distribution process, ensuring users are aware of the deductions.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">11. Can I Update or Cancel My Inheritance Plan?</h2>
+      <div class="toggle-content">
+        <p>Yes, as the contract owner, you can:</p>
+        <ul>
+          <li><strong>Add or Remove Beneficiaries:</strong> Modify the list of beneficiaries. The system automatically adjusts the shares to maintain a total of 100% distribution.</li>
+          <li><strong>Update Periods:</strong> Change the inactivity and grace periods as needed to reflect your current wishes.</li>
+          <li><strong>Register/Unregister Tokens:</strong> Change and manage the tokens you want to be distributed.</li>
+          <li><strong>Delete Your Plan:</strong> You can choose to delete your inheritance plan if you wish.</li>
+        </ul>
+        <p><strong>Important:</strong> You can only have one active inheritance plan at any given time. Once you delete your current plan, you can create a new one.</p>
+        <p><strong>Note:</strong> These actions reset the inactivity timer, ensuring that the inheritance process aligns with your latest settings.</p>
+      </div>
+      
+      <h2 class="toggle-header">12. How Secure Is Hereditas Protocol V2?</h2>
+      <div class="toggle-content">
+        <p>Hereditas V2 prioritizes security through multiple layers of protection:</p>
+        <ul>
+          <li><strong>Smart Contract Audits:</strong> Utilizes well-audited OpenZeppelin contracts to prevent vulnerabilities.</li>
+          <li><strong>Reentrancy Protection:</strong> Implements <code>ReentrancyGuard</code> to safeguard against reentrancy attacks.</li>
+          <li><strong>Secure Token Handling:</strong> Uses <code>SafeERC20</code> to ensure safe interactions with ERC20 tokens.</li>
+          <li><strong>Transparent Operations:</strong> All transactions and distributions are recorded on the blockchain, ensuring transparency and immutability.</li>
+        </ul>
+        <p><strong>Best Practices:</strong> Users are encouraged to keep their private keys secure and interact with the contract only through trusted interfaces.</p>
+      </div>
+      
+      <h2 class="toggle-header">13. What Happens If I Want to Change My Beneficiaries?</h2>
+      <div class="toggle-content">
+        <p>While you cannot directly change the shares of existing beneficiaries, you can:</p>
+        <ul>
+          <li><strong>Add Beneficiaries:</strong> Introduce new beneficiaries and assign their shares. The system will automatically adjust the shares of existing beneficiaries proportionally to accommodate the new allocation.</li>
+          <li><strong>Remove Beneficiaries:</strong> Eliminate existing beneficiaries from the plan. The system will automatically redistribute their shares proportionally among the remaining beneficiaries.</li>
+        </ul>
+        <p><strong>Note:</strong> The total shares must always sum up to 100% (10,000 basis points). The system ensures proportional adjustments to maintain this balance.</p>
+      </div>
+      
+      <h2 class="toggle-header">14. What Are "Interactions" with the Contract and How Do They Reset the Inactivity Period?</h2>
+      <div class="toggle-content">
+        <p><strong>Interactions</strong> with the contract are any actions that indicate activity and reset the inactivity period. These interactions include:</p>
+        <ul>
+          <li><strong>Approving Tokens:</strong> Registering or updating ERC20 tokens for your inheritance plan.</li>
+          <li><strong>Managing Beneficiaries:</strong> Adding or removing beneficiaries.</li>
+          <li><strong>Calling the "Heartbeat":</strong> Heartbeat is a gas-minimal way to manually refresh the inactivity timer.</li>
+        </ul>
+        <p>Each of these interactions updates the <code>lastActive</code> timestamp, effectively resetting the inactivity period countdown. This mechanism ensures that the inheritance process is only initiated when there has been no activity for the specified inactivity period.</p>
+        
+        <p><strong>Importance of Interactions:</strong></p>
+        <p>Regular interactions prevent the unintended initiation of the inheritance process by signaling ongoing management and activity by the contract owner.</p>
+      </div>
+      
+      <h2 class="toggle-header">15. Can I Distribute Assets Early?</h2>
+      <div class="toggle-content">
+        <p>No, assets can only be distributed after the defined inactivity and grace periods have been met. This ensures that the inheritance process is only triggered under the specified conditions, maintaining the integrity and intent of your inheritance plan.</p>
+      </div>
+      
+      <h2 class="toggle-header">16. Which Blockchain Does Hereditas Protocol V2 Operate On?</h2>
+      <div class="toggle-content">
+        <p>Hereditas V2 is deployed on the <strong>Ethereum</strong> blockchain and <strong>Base L2</strong>, leveraging their robust infrastructures and widespread adoption to ensure reliability and security.</p>
+        <p>The deployed contract addresses are as follows:</p>
+        <p><strong>Ethereum Mainnet:</strong> 0x861ca0324a485aB3F920AbE3c23e29e0B6652f51</p>
+        <p><strong>Base L2:</strong> 0x5F3425B4aC63c80643D91Bf4a93771acdBE1F25C</p>
+      </div>
+      
+      <h2 class="toggle-header">17. How Do I Connect My Wallet to Hereditas Protocol V2?</h2>
+      <div class="toggle-content">
+        <ol>
+          <li><strong>Install a Compatible Wallet:</strong> Use wallets like <a href="https://metamask.io/" class="address-link">MetaMask</a> or <a href="https://walletconnect.com/" class="address-link">WalletConnect</a>.</li>
+          <li><strong>Navigate to Hereditas V2:</strong> Visit the Hereditas platform through your web browser.</li>
+          <li><strong>Click "Connect Wallet":</strong> Initiate the connection process.</li>
+          <li><strong>Authorize Connection:</strong> Follow the prompts in your wallet to grant Hereditas access.</li>
+          <li><strong>Start Managing Your Plan:</strong> Once connected, you can create, view, and manage your inheritance plan through the dashboard.</li>
+        </ol>
+      </div>
+      
+      <h2 class="toggle-header">18. Are There Any Fees for Using Hereditas Protocol V2?</h2>
+      <div class="toggle-content">
+        <p>Yes, Hereditas V2 incorporates a transparent fee structure that is only applied during the asset distribution process:</p>
+        <ul>
+          <li><strong>Developer Fee:</strong> A <strong>0.1%</strong> fee is automatically deducted from the total assets being distributed. This fee supports the ongoing development and maintenance of the Hereditas protocol.</li>
+          <li><strong>Executor Fee:</strong> A <strong>1%</strong> fee is applied when executors (non-beneficiaries) initiate the distribution after the grace period.</li>
+        </ul>
+        <p><strong>Additional Notes:</strong></p>
+        <ul>
+          <li><strong>ERC20 Deposits:</strong> Fees are only deducted during the distribution process, ensuring that your assets remain liquid and under your control until you choose to distribute them.</li>
+          <li><strong>Fee Transparency:</strong> All fees are clearly displayed during the distribution process, ensuring users are aware of the deductions.</li>
+        </ul>
+      </div>
+      
+      <h2 class="toggle-header">19. Can I Include Multiple Types of ERC20 Tokens in My Plan?</h2>
+      <div class="toggle-content">
+        <p>Yes, you can include multiple ERC20 tokens within a single inheritance plan. Simply register each token through the approval process, and they will be managed and distributed according to the shares you assign to your beneficiaries.</p>
+      </div>
+      
+      <h2 class="toggle-header">20. What Happens to the Contract After Distribution?</h2>
+      <div class="toggle-content">
+        <p>Once assets are distributed:</p>
+        <ul>
+          <li><strong>Automatic Deletion:</strong> The inheritance contract is automatically deleted from the blockchain, ensuring that no further actions can be taken.</li>
+          <li><strong>Immutable Record:</strong> While the contract is deleted, all distribution actions remain recorded on the blockchain for transparency and reference.</li>
+          <li><strong>Final State:</strong> After deletion, your inheritance plan is considered complete, and a new plan can be created if needed.</li>
+        </ul>
+        <p><strong>Note:</strong> Ensure that all desired assets have been distributed before deleting the contract, as this action is irreversible.</p>
+      </div>
+    </section>
+    
+    <div class="divider"></div>
+  </div>
+  
+  <!-- Include any necessary JavaScript for collapsible sections -->
+  <script src="faq.js"></script>
+</body>
+</html>
